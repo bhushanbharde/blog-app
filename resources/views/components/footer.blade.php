@@ -1,0 +1,1 @@
+<h1 class="text-center p-4 border-t border-t-gray-600">Blog App</h1>
