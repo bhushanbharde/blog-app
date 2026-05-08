@@ -1,3 +1,10 @@
+{{-- 
+Purpose - Homepage.
+Shows:
+    Featured posts
+    Latest blogs 
+--}}
+
 @extends('layouts.frontend')
 
 @section('frontend-content')

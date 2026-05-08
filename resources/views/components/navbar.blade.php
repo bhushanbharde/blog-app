@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center bg-[#1c222c] px-20 border-b border-b-gray-700">
+<div class="flex justify-between items-center bg-[#1c222c] px-16 border-b border-b-gray-700">
     <div class="flex items-center">
         <div class="px-3 font-bold text-xl">BLOG</div>
         <div class="px-3 py-2"><input class="px-4 py-2.5 bg-[#323b49] w-140 text-sm rounded-sm" type="search" name="" id="" placeholder="Search Blog"></div>

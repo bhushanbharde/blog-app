@@ -2,12 +2,16 @@
 
 @section('content')
 
-<h2 class="text-3xl font-bold mb-6 text-center">
-    Login
-</h2>
+<form method="POST">
 
-<form>
-    Login Form
+    @csrf
+
+    <input type="email" name="email">
+
+    <input type="password" name="password">
+
+    <button>Login</button>
+
 </form>
 
 @endsection
