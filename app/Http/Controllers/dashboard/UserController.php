@@ -4,15 +4,19 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $users = DB::table('users')->get();
+        return view('dashboard.users.index', ['users' => $users]);
     }
 
     /**
@@ -34,9 +38,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user = DB::table('users')->where('id', $id)->get();
+        return view('dashboard.users.show', ['user' => $user[0]]);
     }
 
     /**

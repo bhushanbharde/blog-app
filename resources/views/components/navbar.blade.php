@@ -7,7 +7,7 @@
                 <li class="px-2 hover:text-[#054cd8] hover:cursor-pointer transition duration-300">Project</li>
                 <li class="px-2 hover:text-[#054cd8] hover:cursor-pointer transition duration-300">Images</li>
                 <li class="px-2 hover:text-[#054cd8] hover:cursor-pointer transition duration-300">News</li>
-                <li class="px-2 hover:text-[#054cd8] hover:cursor-pointer transition duration-300">Archive</li>
+                <li class="px-2 hover:text-[#054cd8] hover:cursor-pointer transition duration-300"><a href="{{ route('userlist') }}">Users</a></li>
             </ul>
         </div>
     </div>

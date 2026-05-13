@@ -4,7 +4,7 @@
 
 <div class="container mx-auto py-10">
 
-    <div class="grid grid-cols-4 gap-6">
+    <div class="grid gap-6">
 
         <div class="col-span-3">
             @yield('frontend-content')

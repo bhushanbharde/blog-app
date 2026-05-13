@@ -4,9 +4,9 @@
 
 <div class="flex">
 
-    @include('components.sidebar')
+    {{-- @include('components.sidebar') --}}
 
-    <div class="flex-1 p-6">
+    <div class="p-20">
         @yield('dashboard-content')
     </div>
 

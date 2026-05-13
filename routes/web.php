@@ -9,14 +9,21 @@ use App\Http\Controllers\Frontend\ProfileController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
 
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\PostController as DashboardPostController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
-use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
-use App\Http\Controllers\Dashboard\SettingsController;
+// use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
+
+
+Route::get('/users', [UserController::class, 'index'])->name('userlist');
+Route::get('/users/create', [UserController::class, 'create']);
+Route::post('/users/store', [UserController::class, 'store']);
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+Route::get('/user/edit', [UserController::class, 'edit']);
+Route::post('/user/{id}', [UserController::class, 'update']);
+Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +43,7 @@ use App\Http\Controllers\Dashboard\SettingsController;
 Route::get('/',
     [HomeController::class, 'index'])
     ->name('home');
+
 
 
 /*
@@ -156,7 +164,6 @@ Route::middleware('auth')->group(function () {
 | Views:
 | frontend/auth/login.blade.php
 | frontend/auth/register.blade.php
-| frontend/auth/forgot-password.blade.php
 |--------------------------------------------------------------------------
 */
 
@@ -190,17 +197,6 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/register',
         [RegisterController::class, 'register']);
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Forgot Password
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/forgot-password',
-        [ForgotPasswordController::class, 'showLinkRequestForm'])
-        ->name('password.request');
 
 });
 
@@ -303,22 +299,8 @@ Route::middleware(['auth'])
     |--------------------------------------------------------------------------
     */
 
-    Route::get('/comments',
-        [DashboardCommentController::class, 'index'])
-        ->name('comments.index');
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | SETTINGS
-    |--------------------------------------------------------------------------
-    | Views:
-    | dashboard/settings/*
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/settings',
-        [SettingsController::class, 'index'])
-        ->name('settings.index');
+    // Route::get('/comments',
+    //     [DashboardCommentController::class, 'index'])
+    //     ->name('comments.index');
 
 });
