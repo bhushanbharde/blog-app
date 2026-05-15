@@ -115,6 +115,15 @@ blog-platform/
 │       │   ├── sidebar.blade.php
 │       │   ├── post-card.blade.php
 │       │   └── alert.blade.php
+            ├──forms/
+                ├── input.blade.php
+                ├── textarea.blade.php
+                ├── select.blade.php
+                ├── checkbox.blade.php
+                ├── radio.blade.php
+                ├── label.blade.php
+                ├── error.blade.php
+                └── button.blade.php
 │       │
 │       ├── frontend/
 │       │   ├── home.blade.php
@@ -158,6 +167,8 @@ blog-platform/
 │       └── errors/
 │           ├── 404.blade.php
 │           └── 500.blade.php
+|
+        resources/views/components
 │
 ├── routes/
 │   ├── web.php

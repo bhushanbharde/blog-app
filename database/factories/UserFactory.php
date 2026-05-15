@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'bio' => fake()->realText($maxNbChars = 200, $indexSize = 2),
-            'avatar' => fake()->imageUrl(640, 480, 'animals', true),
+            'avatar' => 'https://yt3.ggpht.com/yti/ANjgQV9c7LQ0MbOvY8QqxxUXC0qXcFOn2tXsnTWs5vGT9DS_CUmy=s88-c-k-c0x00ffffff-no-rj',
             'remember_token' => Str::random(20),
         ];
     }

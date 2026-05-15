@@ -2,14 +2,13 @@
 
 @section('content')
 
-<div class="container mx-auto py-10">
+<div class="mx-auto py-16 px-10">
 
-    <div class="grid gap-6">
+    <div class="flex">
 
-        <div class="col-span-3">
+        <div class="w-9/12 pr-10">
             @yield('frontend-content')
         </div>
-
         @include('components.sidebar')
 
     </div>

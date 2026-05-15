@@ -26,7 +26,7 @@ class PostFactory extends Factory
             'title' => fake()->sentence(),
             'slug' => Str::slug($title),
             'content' => fake()->paragraphs(10, true),
-            'cover_image' => fake()->imageUrl(640, 480, 'animals', true),
+            'cover_image' => 'https://miro.medium.com/v2/resize:fit:1400/format:webp/1*DVbm_NZA5u3DRbhMEu3tgQ.jpeg',
             'status' => fake()->randomElement(['draft', 'published']),
             'published_at' => now()
         ];

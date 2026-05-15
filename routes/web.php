@@ -16,14 +16,17 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
 // use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
 
+Route::controller(UserController::class)->group(function(){
+    Route::get('/users', 'index')->name('userlist');
+    Route::get('/users/create', 'create')->name('user.create');
+    Route::post('/users/store', 'store')->name('user.store');
+    Route::get('/user/edit/{id}', 'edit')->name('user.edit');
+    Route::get('/user/{id}', 'show')->name('user.show');
+    Route::post('/user/{id}', 'update')->name('user.update');
+    Route::get('/user/delete/{id}', 'destroy')->name('user.delete');
+});
 
-Route::get('/users', [UserController::class, 'index'])->name('userlist');
-Route::get('/users/create', [UserController::class, 'create']);
-Route::post('/users/store', [UserController::class, 'store']);
-Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
-Route::get('/user/edit', [UserController::class, 'edit']);
-Route::post('/user/{id}', [UserController::class, 'update']);
-Route::delete('/user/{id}', [UserController::class, 'destroy']);
+Route::resource('posts', PostController::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -59,45 +62,45 @@ Route::get('/',
 |--------------------------------------------------------------------------
 */
 
-/* All Posts */
-Route::get('/posts',
-    [PostController::class, 'index'])
-    ->name('posts.index');
+// /* All Posts */
+// Route::get('/posts',
+//     [PostController::class, 'index'])
+//     ->name('posts.index');
 
 
-/* Single Post */
-Route::get('/posts/{slug}',
-    [PostController::class, 'show'])
-    ->name('posts.show');
+// /* Single Post */
+// Route::get('/posts/{id}',
+//     [PostController::class, 'show'])
+//     ->name('posts.show');
 
 
 /* Create Post Page */
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth')->group(function () {
 
-    Route::get('/posts/create',
-        [PostController::class, 'create'])
-        ->name('posts.create');
+//     Route::get('/posts/create',
+//         [PostController::class, 'create'])
+//         ->name('posts.create');
 
-    Route::post('/posts',
-        [PostController::class, 'store'])
-        ->name('posts.store');
+//     Route::post('/posts',
+//         [PostController::class, 'store'])
+//         ->name('posts.store');
 
-});
+// });
 
 
 /* Edit Post */
 
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth')->group(function () {
 
-    Route::get('/posts/{post}/edit',
-        [PostController::class, 'edit'])
-        ->name('posts.edit');
+//     Route::get('/posts/{post}/edit',
+//         [PostController::class, 'edit'])
+//         ->name('posts.edit');
 
-    Route::put('/posts/{post}',
-        [PostController::class, 'update'])
-        ->name('posts.update');
+//     Route::put('/posts/{post}',
+//         [PostController::class, 'update'])
+//         ->name('posts.update');
 
-});
+// });
 
 
 /* My Posts */
@@ -259,9 +262,9 @@ Route::middleware(['auth'])
     |--------------------------------------------------------------------------
     */
 
-    Route::get('/posts-trash',
-        [DashboardPostController::class, 'trash'])
-        ->name('posts.trash');
+    // Route::get('/posts-trash',
+    //     [DashboardPostController::class, 'trash'])
+    //     ->name('posts.trash');
 
 
     /*

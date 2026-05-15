@@ -13,20 +13,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="bg-[#1c222c] text-gray-100 min-h-screen flex flex-col">
+<body class="bg-[#101828] text-gray-100 min-h-screen flex flex-col">
 
     {{-- Navbar --}}
     @include('components.navbar')
 
     {{-- Main Content --}}
-    <main class="flex-1">
+    <main class="h-screen">
         @yield('content')
     </main>
 
     {{-- Footer --}}
-    @include('components.footer')
+    {{-- @include('components.footer') --}}
 
 </body>
 

@@ -11,9 +11,12 @@ Actions
 @extends('layouts.dashboard')
 
 @section('dashboard-content')
-    <h1 class="text-4xl font-bold mb-6">
-        Users List
-    </h1>
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-4xl font-bold ">
+            Users List
+        </h1>
+        <a href="{{ route('user.create') }}" class="px-4 py-2 bg-indigo-600 rounded-sm">New User</a>
+    </div>
 
     <table class="border-collapse border border-gray-600 p-2">
         <thead>
@@ -33,8 +36,8 @@ Actions
                     <td class="border border-gray-600 px-3 py-2">{{ $user->email }}</td>
                     <td class="border border-gray-600 px-3 py-2">{{ $user->bio }}</td>
                     <td class="border border-gray-600 px-3 py-2"><a href={{ route('user.show', $user->id) }} class="px-4 py-2 rounded-sm bg-blue-600">View</a></td>
-                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('user.show', $user->id) }} class="px-4 py-2 rounded-sm bg-gray-600">Edit</a></td>
-                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('user.show', $user->id) }} class="px-4 py-2 rounded-sm bg-red-700">Delete</a></td>
+                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('user.edit', $user->id) }} class="px-4 py-2 rounded-sm bg-gray-600">Edit</a></td>
+                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('user.delete', $user->id) }} class="px-4 py-2 rounded-sm bg-red-700">Delete</a></td>
                 </tr>
             @endforeach
 

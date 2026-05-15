@@ -7,7 +7,9 @@
 @foreach($posts as $post)
 
     @include('components.post-card')
+    <hr class="text-gray-700" />
 
 @endforeach
+
 
 @endsection

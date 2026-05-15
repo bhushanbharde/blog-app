@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class PostController extends Controller
@@ -13,7 +14,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = DB::table('posts')
+                    ->join('users', 'posts.user_id', '=', 'users.id')
+                    ->select(['posts.*', 'users.name', 'users.avatar'])
+                    ->take(20)
+                    ->get();
+        return view('frontend.posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -37,7 +43,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $post->load('user');
+        dd($post);
+        return view('frontend.posts.show', ['post' => $post]);
     }
 
     /**

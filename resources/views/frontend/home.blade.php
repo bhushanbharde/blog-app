@@ -8,5 +8,5 @@ Shows:
 @extends('layouts.frontend')
 
 @section('frontend-content')
-    <h1 class="text-4xl">Recent Articles</h1>
+    <h1 class="text-4xl font-semibold">Recent Articles</h1>
 @endsection

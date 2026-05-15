@@ -7,14 +7,32 @@ Used In:
 --}}
 
 
-<div class="p-6 rounded shadow">
+<div class="py-6 rounded-md shadow my-3">
+    <div class="flex items-center text-sm">
+        <img class="rounded-full w-6 mr-2 " src="{{ $post->avatar }}" alt="">
+        <span>{{ $post->name }}</span>
+        <i class="fa-solid fa-circle text-[5px] mx-2"></i>
+        <span class="text-gray-400">May 13</span>
+    </div>
 
-    <h2 class="text-2xl font-bold">
-        {{ $post->title }}
-    </h2>
+    <a href="{{ route('posts.show', $post->id) }}" class="flex items-center">
+        <div class="w-9/12 pr-12">
+            <h2 class="text-2xl mb-2 font-bold">{{ $post->title }}</h2>
+            <p class="line-clamp-3 text-sm text-gray-400">{{ $post->content }}</p>
+        </div>
 
-    <p class="mt-2 text-gray-600">
-        {{ Str::limit($post->content, 100) }}
-    </p>
+        <img class="w-3/12" src="{{ $post->cover_image }}" alt="">
+    </a>
 
+    <div class="flex text-gray-400 text-sm gap-6">
+        <div>
+            <a href=""><i class="fa-solid fa-hands-clapping"></i> 23</a>
+        </div>
+        <div>
+            <a href=""><i class="fa-regular fa-comment"></i> 34</a>
+        </div>
+        <div>
+            <a href=""><i class="fa-solid fa-retweet"></i> 12</a>
+        </div>
+    </div>
 </div>
