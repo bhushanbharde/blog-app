@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Post;
+use App\Models\User;
+use App\Services\UnsplashService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,20 +23,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //Load sidebar
-        // $topPosts = DB::table('posts')
-        //             ->join('users', 'posts.user_id', '=', 'users.id')
-        //             ->select(['posts.*', 'users.name', 'users.avatar'])
-        //             ->take(3)
-        //             ->get();
-
         view()->composer('components.sidebar', function ($view) {
             $view->with([
                 'posts' => DB::table('posts')
                     ->join('users', 'posts.user_id', '=', 'users.id')
                     ->select(['posts.*', 'users.name', 'users.avatar'])
+                    ->orderBy('id', 'desc')
                     ->take(3)
-                    ->get()
+                    ->get(),
+
+                'users' => User::take(3)->get()
             ]);
         });
     }

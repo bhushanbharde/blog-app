@@ -7,21 +7,24 @@ Used In:
 --}}
 
 
-<div class="py-6 rounded-md shadow my-3">
-    <div class="flex items-center text-sm">
-        <img class="rounded-full w-6 mr-2 " src="{{ $post->avatar }}" alt="">
-        <span>{{ $post->name }}</span>
-        <i class="fa-solid fa-circle text-[5px] mx-2"></i>
-        <span class="text-gray-400">May 13</span>
+<div class="py-8 rounded-md shadow border-b border-b-gray-700">
+    <div class="flex items-center text-sm my-3">
+        <img class="rounded-full w-8 mr-2 " src="{{ $post->user->avatar }}" alt="">
+        <a href="">{{ $post->user->name }}</a>
+        <i class="fa-solid fa-circle text-[4px] mx-2 text-gray-400"></i>
+        <span class="text-gray-400">{{ \Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span>
     </div>
 
-    <a href="{{ route('posts.show', $post->id) }}" class="flex items-center">
+    <a href="{{ route('posts.show', $post->id) }}" class="flex ">
         <div class="w-9/12 pr-12">
-            <h2 class="text-2xl mb-2 font-bold">{{ $post->title }}</h2>
-            <p class="line-clamp-3 text-sm text-gray-400">{{ $post->content }}</p>
+            <h2 class="text-2xl my-2 font-bold">{{ $post->title }}</h2>
+            <p class="line-clamp-3 text-sm text-gray-400 leading-6">
+                {{ Str::words(strip_tags(preg_replace('/<h2[^>]*>.*?<\/h2>/is', '', $post->content))) }}
+            </p>
         </div>
 
-        <img class="w-3/12" src="{{ $post->cover_image }}" alt="">
+        {{-- <img class="w-3/12 rounded-lg" src="{{ $post->cover_image }}" alt=""> --}}
+        <img class="w-3/12 rounded-lg object-cover" src="{{ $post->cover_image }}" alt="">
     </a>
 
     <div class="flex text-gray-400 text-sm gap-6">

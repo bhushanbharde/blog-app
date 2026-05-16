@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'desc')->get();
         return view('dashboard.users.index', ['users' => $users]);
     }
 
@@ -59,7 +59,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = DB::table('users')->where('id', $id)->get();
+        $user = User::where('id', $id)->get();
         return view('dashboard.users.show', ['user' => $user[0]]);
     }
 
@@ -68,7 +68,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = DB::table('users')->where('id', $id)->get();
+        $user = User::where('id', $id)->get();
         return view('dashboard.users.edit', ['user' => $user[0]]);
     }
 
@@ -78,7 +78,7 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         // dd($request);
-        $user = DB::table('users')->where('id', $id)->update([
+        $user = User::where('id', $id)->update([
             'name' => $request->name,
             'email' => $request->email,
             'bio' => $request->bio,
@@ -86,7 +86,7 @@ class UserController extends Controller
             'updated_at' => now()
         ]);
         if($user){
-            return redirect()->route('userlist');
+            return redirect()->route('userlist')->with('status', 'User updated successfully!');
         }
         else{
             return "Something went wrong!";
@@ -98,9 +98,9 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $user = DB::table('users')->where('id', $id)->delete();
+        $user = User::where('id', $id)->delete();
         if($user)
-            return redirect()->route('userlist');
+            return redirect()->route('userlist')->with('status', 'User deleted successfully!');
         return "Something went wrong!";
     }
 }

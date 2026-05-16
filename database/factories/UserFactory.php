@@ -24,12 +24,16 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $randomFaceId = $this->faker->numberBetween(50, 222);
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'bio' => fake()->realText($maxNbChars = 200, $indexSize = 2),
-            'avatar' => 'https://yt3.ggpht.com/yti/ANjgQV9c7LQ0MbOvY8QqxxUXC0qXcFOn2tXsnTWs5vGT9DS_CUmy=s88-c-k-c0x00ffffff-no-rj',
+            'avatar' => "https://mockmind-api.uifaces.co/content/human/{$randomFaceId}.jpg",
+            'role' => fake()->randomElement([1,2,3]),
+            'about' => fake()->randomElement(['Product Manager', 'Professor', 'Product design', 'Entrepreneur', 'Health scientist', 'Tech Writer', 'AI Engineer', 'Data Analyst', 'Best selling author']),
             'remember_token' => Str::random(20),
         ];
     }

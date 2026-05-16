@@ -9,8 +9,16 @@
     </div>
 
     <hr class="text-gray-700" />
-    
+
     <div class="">
+        <div class="flex py-6">
+            <div class="w-1/3">Profile Photo</div>
+            <div class="w-2/3 text-gray-400">
+                <img class="w-44 rounded-lg" src="{{ $user->avatar }}" alt="">
+            </div>
+        </div>
+        <hr class="text-gray-700" />
+
         <div class="flex py-6">
             <div class="w-1/3">Full Name</div>
             <div class="w-2/3 text-gray-400">{{ $user->name }}</div>
@@ -22,13 +30,6 @@
             <div class="w-2/3 text-gray-400">{{ $user->email }}</div>
         </div>
         <hr class="text-gray-700" />
-
-        <div class="flex py-6">
-            <div class="w-1/3">Avatar</div>
-            <div class="w-2/3 text-gray-400">{{ $user->avatar }}</div>
-        </div>
-        <hr class="text-gray-700" />
-
 
         <div class="flex py-6">
             <div class="w-1/3">Bio</div>

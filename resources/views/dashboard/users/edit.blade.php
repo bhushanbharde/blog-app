@@ -45,7 +45,7 @@ Update user role/profile. --}}
                     <p class="mt-2 text-red-400">{{ $message }}</p>
                 @enderror
 
-                <button class="px-4 py-2 bg-blue-600 rounded-sm mt-8 w-full hover:cursor-pointer">Edit</button>
+                <button class="px-4 py-2 bg-blue-600 rounded-sm mt-8 w-full hover:cursor-pointer">Save</button>
             </form>
         </div>
     </div>

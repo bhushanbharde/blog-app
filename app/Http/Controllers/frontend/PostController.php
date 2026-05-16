@@ -14,11 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = DB::table('posts')
-                    ->join('users', 'posts.user_id', '=', 'users.id')
-                    ->select(['posts.*', 'users.name', 'users.avatar'])
-                    ->take(20)
-                    ->get();
+        $posts = Post::with('user')->paginate(5);
         return view('frontend.posts.index', ['posts' => $posts]);
     }
 
@@ -41,11 +37,13 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        $post->load('user');
-        dd($post);
-        return view('frontend.posts.show', ['post' => $post]);
+        $post = Post::with('user')
+                    ->where('id', $id)
+                    ->get();
+                    
+        return view('frontend.posts.show', ['post' => $post[0]]);
     }
 
     /**

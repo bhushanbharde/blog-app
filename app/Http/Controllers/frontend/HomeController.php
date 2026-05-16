@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -9,7 +10,7 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     public function index(){
-        $users = DB::table('users')->get();
-        return view('frontend.home', ['users' => $users]);
+        $posts = Post::with('user')->latest()->take(20)->get();
+        return view('frontend.home', ['posts' => $posts]);
     }
 }

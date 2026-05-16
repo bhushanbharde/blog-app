@@ -16,6 +16,8 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
 // use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::controller(UserController::class)->group(function(){
     Route::get('/users', 'index')->name('userlist');
     Route::get('/users/create', 'create')->name('user.create');
@@ -43,9 +45,7 @@ Route::resource('posts', PostController::class);
 |--------------------------------------------------------------------------
 */
 
-Route::get('/',
-    [HomeController::class, 'index'])
-    ->name('home');
+
 
 
 
