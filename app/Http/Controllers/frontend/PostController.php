@@ -39,11 +39,18 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::with('user')
-                    ->where('id', $id)
-                    ->get();
+        $post = Post::with([
+            'comments.user',
+            'tags',
+            'user'
+        ])
+        ->withCount('likes')
+        ->where('id', $id)
+        ->firstOrFail();
+
+        // dd($post->comments);
                     
-        return view('frontend.posts.show', ['post' => $post[0]]);
+        return view('frontend.posts.show', ['post' => $post]);
     }
 
     /**

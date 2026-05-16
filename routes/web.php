@@ -11,12 +11,16 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\PostController as DashboardPostController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
+// use App\Http\Controllers\Dashboard\PostController as DashboardPostController;
 // use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
 
+// Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dindex');
+
 
 Route::controller(UserController::class)->group(function(){
     Route::get('/users', 'index')->name('userlist');
@@ -28,89 +32,23 @@ Route::controller(UserController::class)->group(function(){
     Route::get('/user/delete/{id}', 'destroy')->name('user.delete');
 });
 
-Route::resource('posts', PostController::class);
-
-/*
-|--------------------------------------------------------------------------
-| FRONTEND ROUTES
-|--------------------------------------------------------------------------
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Home Page
-|--------------------------------------------------------------------------
-| View:
-| resources/views/frontend/home.blade.php
-|--------------------------------------------------------------------------
-*/
-
-
-
-
-
-/*
-|--------------------------------------------------------------------------
-| POSTS ROUTES
-|--------------------------------------------------------------------------
-| Views:
-| frontend/posts/index.blade.php
-| frontend/posts/show.blade.php
-| frontend/posts/create.blade.php
-| frontend/posts/edit.blade.php
-| frontend/posts/my-posts.blade.php
-|--------------------------------------------------------------------------
-*/
-
 // /* All Posts */
-// Route::get('/posts',
-//     [PostController::class, 'index'])
-//     ->name('posts.index');
-
+Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 
 // /* Single Post */
-// Route::get('/posts/{id}',
-//     [PostController::class, 'show'])
-//     ->name('posts.show');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
-
-/* Create Post Page */
+/* Create/Edit Post Page */
 // Route::middleware('auth')->group(function () {
-
-//     Route::get('/posts/create',
-//         [PostController::class, 'create'])
-//         ->name('posts.create');
-
-//     Route::post('/posts',
-//         [PostController::class, 'store'])
-//         ->name('posts.store');
-
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/posts/{post}',[PostController::class, 'update'])->name('posts.update');
 // });
-
-
-/* Edit Post */
-
-// Route::middleware('auth')->group(function () {
-
-//     Route::get('/posts/{post}/edit',
-//         [PostController::class, 'edit'])
-//         ->name('posts.edit');
-
-//     Route::put('/posts/{post}',
-//         [PostController::class, 'update'])
-//         ->name('posts.update');
-
-// });
-
 
 /* My Posts */
-
 Route::middleware('auth')->group(function () {
-
-    Route::get('/my-posts',
-        [PostController::class, 'myPosts'])
-        ->name('posts.my');
-
+    Route::get('/my-posts', [PostController::class, 'myPosts'])->name('posts.my');
 });
 
 
@@ -123,10 +61,7 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/categories/{slug}',
-    [CategoryController::class, 'show'])
-    ->name('categories.show');
-
+Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -204,12 +139,7 @@ Route::middleware('guest')->group(function () {
 });
 
 
-/* Logout */
 
-Route::post('/logout',
-    [LoginController::class, 'logout'])
-    ->middleware('auth')
-    ->name('logout');
 
 
 /*
@@ -228,20 +158,6 @@ Route::middleware(['auth'])
 
     /*
     |--------------------------------------------------------------------------
-    | Dashboard Home
-    |--------------------------------------------------------------------------
-    | View:
-    | dashboard/index.blade.php
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/',
-        [DashboardController::class, 'index'])
-        ->name('index');
-
-
-    /*
-    |--------------------------------------------------------------------------
     | DASHBOARD POSTS
     |--------------------------------------------------------------------------
     | Views:
@@ -249,8 +165,7 @@ Route::middleware(['auth'])
     |--------------------------------------------------------------------------
     */
 
-    Route::resource('posts',
-        DashboardPostController::class);
+    Route::resource('posts', DashboardPostController::class);
 
 
     /*
@@ -276,9 +191,7 @@ Route::middleware(['auth'])
     |--------------------------------------------------------------------------
     */
 
-    Route::resource('users',
-        UserController::class);
-
+    Route::resource('users', UserController::class);
 
     /*
     |--------------------------------------------------------------------------
@@ -289,8 +202,7 @@ Route::middleware(['auth'])
     |--------------------------------------------------------------------------
     */
 
-    Route::resource('categories',
-        DashboardCategoryController::class);
+    Route::resource('categories', DashboardCategoryController::class);
 
 
     /*
@@ -302,8 +214,11 @@ Route::middleware(['auth'])
     |--------------------------------------------------------------------------
     */
 
-    // Route::get('/comments',
-    //     [DashboardCommentController::class, 'index'])
-    //     ->name('comments.index');
-
+    Route::get('/comments', [DashboardCommentController::class, 'index'])->name('comments.index');
 });
+
+/* Logout */
+Route::post('/logout',
+[LoginController::class, 'logout'])
+->middleware('auth')
+->name('logout');

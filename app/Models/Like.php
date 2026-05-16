@@ -9,4 +9,6 @@ class Like extends Model
 {
     /** @use HasFactory<\Database\Factories\LikeFactory> */
     use HasFactory;
+
+    public $timestamps = false;
 }

@@ -8,5 +8,6 @@
     @foreach ($posts as $post)
         @include('components.post-card')
     @endforeach
+    <div class="my-8"></div>
     {{ $posts->links() }}
 @endsection

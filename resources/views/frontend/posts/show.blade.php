@@ -6,8 +6,8 @@
     <div class="pt-20 px-28">
         <h1 class="text-4xl font-bold mb-4">{{ $post->title }}</h1>
         <div class="flex items-center gap-4 text-sm my-8">
-            <img class="rounded-full w-8 " src="{{ $post->avatar }}" alt="">
-            <span>{{ $post->name }}</span>
+            <img class="rounded-full w-8 " src="{{ $post->user->avatar }}" alt="">
+            <span>{{ $post->user->name }}</span>
             <a href="" class="px-4 py-2 border border-gray-700 rounded-xl hover:bg-gray-700">Follow</a>
             <span>{{ max(1, ceil(str_word_count(strip_tags($post->content)) / 200)) }} min read</span>
             <i class="fa-solid fa-circle text-[3px]"></i>
@@ -18,25 +18,25 @@
         <div class="flex justify-between py-4">
             <div class="flex text-gray-400 text-sm gap-6">
                 <div>
-                    <a href=""><i class="fa-solid fa-hands-clapping"></i> 23</a>
+                    <a href="" class="flex items-center gap-1"><i class="text-xl fa-solid fa-hands-clapping"></i>{{ $post->like }}</a>
                 </div>
                 <div>
-                    <a href=""><i class="fa-regular fa-comment"></i> 34</a>
+                    <a href="" class="flex items-center gap-1"><i class="text-xl fa-regular fa-comment"></i>{{ $post->comments->count() }}</a>
                 </div>
                 <div>
-                    <a href=""><i class="fa-solid fa-retweet"></i> 12</a>
+                    <a href="" class="flex items-center gap-1"><i class="text-xl fa-solid fa-retweet"></i> 12</a>
                 </div>
             </div>
 
-            <div class="flex text-gray-400 text-sm gap-6">
+            <div class="flex text-gray-400 text-xl gap-6">
                 <div>
-                    <a href=""><i class="fa-solid fa-hands-clapping"></i> 23</a>
+                    <a href=""><i class="fa-regular fa-bookmark"></i></a>
                 </div>
                 <div>
-                    <a href=""><i class="fa-regular fa-comment"></i> 34</a>
+                    <a href=""><i class="fa-regular fa-circle-play"></i></a>
                 </div>
                 <div>
-                    <a href=""><i class="fa-solid fa-retweet"></i> 12</a>
+                    <a href=""><i class="fa-solid fa-share-nodes"></i></a>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ border-b-gray-700 fixed z-10 w-full">
         <div class="px-3 text-sm">
             <ul class="flex items-center justify-between mx-4 font-semibold">
                 <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300"><a href="{{ route('posts.index') }}">Posts</a></li>
-                <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300">Images</li>
+                <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300"><a href="/">Dashboard</a></li>
                 <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300">News</li>
                 <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300"><a href="{{ route('userlist') }}">Users</a></li>
             </ul>

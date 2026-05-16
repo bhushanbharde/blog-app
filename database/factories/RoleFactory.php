@@ -18,11 +18,15 @@ class RoleFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake(3)->randomElement(['Admin', 'Author', 'Reader']);
+        $role = fake()->randomElement([
+            'Admin',
+            'Author',
+            'Reader'
+        ]);
 
         return [
-            'name' => $name,
-            'shortname' => Str::lower($name)
+            'name' => $role,
+            'shortname' => Str::lower($role),
         ];
     }
 }
