@@ -6,16 +6,18 @@ border-b-gray-700 fixed z-10 w-full">
         <div class="px-3 text-sm">
             <ul class="flex items-center justify-between mx-4 font-semibold">
                 <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300"><a href="{{ route('posts.index') }}">Posts</a></li>
-                <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300"><a href="/">Dashboard</a></li>
+                <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300"><a href="{{ route('dash.users.index') }}">Dashboard</a></li>
                 <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300">News</li>
-                <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300"><a href="{{ route('userlist') }}">Users</a></li>
+                <li class="px-2 hover:text-blue-600 hover:cursor-pointer transition duration-300"><a href="#">Settings</a></li>
             </ul>
         </div>
     </div>
 
     <div class="flex items-center">
         <div class="px-3">
-            <img class="w-8 border rounded-3xl" src="https://lh5.googleusercontent.com/-8NqnTnwVqr4/AAAAAAAAAAI/AAAAAAAAAic/lEhfY7K7mVs/c/photo.jpg" alt="user logo">
+            <a href="{{ route('profile.show', 'bhush1462') }}">
+                <img class="w-8 border rounded-3xl" src="https://lh5.googleusercontent.com/-8NqnTnwVqr4/AAAAAAAAAAI/AAAAAAAAAic/lEhfY7K7mVs/c/photo.jpg" alt="user logo">
+            </a>
         </div>
         <div class="px-3">
             <i class="fa-solid fa-bars text-2xl"></i>

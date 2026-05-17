@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\dashboard;
 
-use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
@@ -12,7 +13,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.tags.index');
     }
 
     /**
@@ -34,15 +35,24 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Tag $tag)
     {
-        //
+        $posts = $tag->posts()
+                 ->latest()
+                 ->paginate(10);
+
+        return view('dashboard.tags.show', compact(
+            'tag',
+            'posts'
+        ));
+
+        // return view('dashboard.tags.show', ['tag' => $tag->id]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Tag $tag)
     {
         //
     }
@@ -50,7 +60,7 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -58,7 +68,7 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Tag $tag)
     {
         //
     }

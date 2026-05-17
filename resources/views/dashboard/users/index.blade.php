@@ -15,7 +15,7 @@ Actions
         <h1 class="text-4xl font-bold ">
             Users List
         </h1>
-        <a href="{{ route('user.create') }}" class="px-4 py-2 bg-indigo-600 rounded-sm">New User</a>
+        <a href="{{ route('dash.users.create') }}" class="px-4 py-2 bg-indigo-600 rounded-sm">New User</a>
     </div>
 
     @if (session('status'))
@@ -29,7 +29,7 @@ Actions
                 <th class="border border-gray-600 px-3 py-2">Avatar</th>
                 <th class="border border-gray-600 px-3 py-2">Name</th>
                 <th class="border border-gray-600 px-3 py-2">Email</th>
-                <th class="border border-gray-600 px-3 py-2">View</th>
+                <th class="border border-gray-600 px-3 py-2" colspan="3">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -41,9 +41,9 @@ Actions
                     </td>
                     <td class="border border-gray-600 px-3 py-2">{{ $user->name }}</td>
                     <td class="border border-gray-600 px-3 py-2">{{ $user->email }}</td>
-                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('user.show', $user->id) }} class="px-4 py-2 rounded-sm bg-blue-600">View</a></td>
-                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('user.edit', $user->id) }} class="px-4 py-2 rounded-sm bg-gray-600">Edit</a></td>
-                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('user.delete', $user->id) }} class="px-4 py-2 rounded-sm bg-red-700">Delete</a></td>
+                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('dash.users.show', $user->id) }} class="px-4 py-2 rounded-sm bg-blue-600">View</a></td>
+                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('dash.users.edit', $user->id) }} class="px-4 py-2 rounded-sm bg-gray-600">Edit</a></td>
+                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('dash.users.destroy', $user->id) }} class="px-4 py-2 rounded-sm bg-red-700">Delete</a></td>
                 </tr>
             @endforeach
 

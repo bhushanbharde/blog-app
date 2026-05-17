@@ -1,6 +1,6 @@
 {{-- Purpose
 
-Create admin/author user. --}}
+Create admin/author user --}}
 
 @extends('layouts.dashboard')
 
@@ -11,7 +11,7 @@ Create admin/author user. --}}
         </h1>
     
         <div>
-            <form action="{{ route('user.store') }}" method="POST" class="text-sm">
+            <form action="{{ route('dash.users.store') }}" method="POST" class="text-sm">
                 @csrf
                 <div class="mt-8">
                     <label>User Name</label>

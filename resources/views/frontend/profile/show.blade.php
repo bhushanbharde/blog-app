@@ -1,8 +1,8 @@
 {{-- 
-    Purpose
+Purpose - Public author profile.
 
-Public author profile.
+Shows:
+    Author info
+    Published blogs --}}
 
-Shows
-Author info
-Published blogs --}}
+<h1>View Profile Page</h1>

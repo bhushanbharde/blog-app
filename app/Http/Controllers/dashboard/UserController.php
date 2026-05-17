@@ -47,7 +47,7 @@ class UserController extends Controller
         ]);
 
         if($user){
-            return redirect()->route('userlist');
+            return redirect()->route('dash.users.index');
         }
         else{
             return "Something went wrong!";
@@ -86,7 +86,7 @@ class UserController extends Controller
             'updated_at' => now()
         ]);
         if($user){
-            return redirect()->route('userlist')->with('status', 'User updated successfully!');
+            return redirect()->route('dash.users.index')->with('status', 'User updated successfully!');
         }
         else{
             return "Something went wrong!";
@@ -100,7 +100,7 @@ class UserController extends Controller
     {
         $user = User::where('id', $id)->delete();
         if($user)
-            return redirect()->route('userlist')->with('status', 'User deleted successfully!');
+            return redirect()->route('dash.users.index')->with('status', 'User deleted successfully!');
         return "Something went wrong!";
     }
 }

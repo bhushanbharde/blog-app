@@ -5,7 +5,7 @@
         <h1 class="text-xl font-semibold ">
             Users Info
         </h1>
-        <a href="/users" class="px-4 py-2 bg-indigo-600 rounded-sm">Back</a>
+        <a href="{{ route('dash.users.index') }}" class="px-4 py-2 bg-indigo-600 rounded-sm">Back</a>
     </div>
 
     <hr class="text-gray-700" />

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
@@ -12,7 +13,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.tags.index');
     }
 
     /**
@@ -36,7 +37,19 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $posts = $tag->posts()
+                 ->latest()
+                 ->paginate(10);
+        
+        $tags = Tag::all();
+
+        return view('dashboard.tags.show', compact(
+            'tag',
+            'posts',
+            'tags'
+        ));
+
+        // return view('dashboard.tags.show', ['tag' => $tag->id]);
     }
 
     /**

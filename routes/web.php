@@ -2,49 +2,32 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\PostController;
-use App\Http\Controllers\Frontend\CategoryController;
-use App\Http\Controllers\Frontend\ProfileController;
-
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Frontend\TagController;
 
-use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\PostController;
+
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Frontend\ProfileController;
+use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\PostController as DashboardPostController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
-// use App\Http\Controllers\Dashboard\PostController as DashboardPostController;
 // use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
 
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dindex');
-
-
-Route::controller(UserController::class)->group(function(){
-    Route::get('/users', 'index')->name('userlist');
-    Route::get('/users/create', 'create')->name('user.create');
-    Route::post('/users/store', 'store')->name('user.store');
-    Route::get('/user/edit/{id}', 'edit')->name('user.edit');
-    Route::get('/user/{id}', 'show')->name('user.show');
-    Route::post('/user/{id}', 'update')->name('user.update');
-    Route::get('/user/delete/{id}', 'destroy')->name('user.delete');
-});
-
 // /* All Posts */
-Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+Route::resource('posts', PostController::class);
 
-// /* Single Post */
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
-
-/* Create/Edit Post Page */
+// 2. Protected routes requiring authentication
 // Route::middleware('auth')->group(function () {
-    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::put('/posts/{post}',[PostController::class, 'update'])->name('posts.update');
+    // Route::resource('posts', PostController::class)->except(['index', 'show']);
 // });
+
 
 /* My Posts */
 Route::middleware('auth')->group(function () {
@@ -52,173 +35,63 @@ Route::middleware('auth')->group(function () {
 });
 
 
-/*
-|--------------------------------------------------------------------------
-| CATEGORY ROUTES
-|--------------------------------------------------------------------------
-| View:
-| frontend/categories/show.blade.php
-|--------------------------------------------------------------------------
-*/
-
+// CATEGORY ROUTES
 Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 
-/*
-|--------------------------------------------------------------------------
-| PROFILE ROUTES
-|--------------------------------------------------------------------------
-| Views:
-| frontend/profile/show.blade.php
-| frontend/profile/edit.blade.php
-|--------------------------------------------------------------------------
-*/
+// TAGS ROUTES
+Route::resource('tags', TagController::class);
 
 /* Public Profile */
-
-Route::get('/profile/{username}',
-    [ProfileController::class, 'show'])
-    ->name('profile.show');
-
+Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');
 
 /* Edit Profile */
+// Route::middleware('auth')->group(function () {
+    Route::get('/profile/edit',[ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update',[ProfileController::class, 'update'])->name('profile.update');
 
-Route::middleware('auth')->group(function () {
-
-    Route::get('/profile/edit',
-        [ProfileController::class, 'edit'])
-        ->name('profile.edit');
-
-    Route::put('/profile/update',
-        [ProfileController::class, 'update'])
-        ->name('profile.update');
-
-});
+    /* Logout */
+    Route::post('/logout', [LoginController::class, 'logout'])
+        ->middleware('auth')
+        ->name('logout');
+// });
 
 
-/*
-|--------------------------------------------------------------------------
-| AUTH ROUTES
-|--------------------------------------------------------------------------
-| Views:
-| frontend/auth/login.blade.php
-| frontend/auth/register.blade.php
-|--------------------------------------------------------------------------
-*/
-
-/* Guest Only */
-
+/* Guest Only - AUTH ROUTES */
 Route::middleware('guest')->group(function () {
+    // Login
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
 
-    /*
-    |--------------------------------------------------------------------------
-    | Login
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/login',
-        [LoginController::class, 'showLoginForm'])
-        ->name('login');
-
-    Route::post('/login',
-        [LoginController::class, 'login']);
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Register
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/register',
-        [RegisterController::class, 'showRegisterForm'])
-        ->name('register');
-
-    Route::post('/register',
-        [RegisterController::class, 'register']);
-
+    // Register
+    Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register']);
 });
 
-
-
-
-
-/*
-|--------------------------------------------------------------------------
-| DASHBOARD ROUTES
-|--------------------------------------------------------------------------
-| Views:
-| dashboard/*
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware(['auth'])
-    ->prefix('dashboard')
-    ->name('dashboard.')
+// DASHBOARD ROUTES
+Route::prefix('dashboard')
+    ->name('dash.')
     ->group(function () {
 
-    /*
-    |--------------------------------------------------------------------------
-    | DASHBOARD POSTS
-    |--------------------------------------------------------------------------
-    | Views:
-    | dashboard/posts/*
-    |--------------------------------------------------------------------------
-    */
+    // Trash Posts
+    Route::get('/posts-trash', [DashboardPostController::class, 'trash'])->name('posts.trash');
 
-    Route::resource('posts', DashboardPostController::class);
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Trash Posts
-    |--------------------------------------------------------------------------
-    | View:
-    | dashboard/posts/trash.blade.php
-    |--------------------------------------------------------------------------
-    */
-
-    // Route::get('/posts-trash',
-    //     [DashboardPostController::class, 'trash'])
-    //     ->name('posts.trash');
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | USERS
-    |--------------------------------------------------------------------------
-    | Views:
-    | dashboard/users/*
-    |--------------------------------------------------------------------------
-    */
-
+    // USERS
     Route::resource('users', UserController::class);
 
-    /*
-    |--------------------------------------------------------------------------
-    | CATEGORIES
-    |--------------------------------------------------------------------------
-    | Views:
-    | dashboard/categories/*
-    |--------------------------------------------------------------------------
-    */
+    // Route::controller(UserController::class)->group(function(){
+    //     Route::get('/users', 'index')->name('userlist');
+    //     Route::get('/users/create', 'create')->name('user.create');
+    //     Route::post('/users/store', 'store')->name('user.store');
+    //     Route::get('/user/edit/{id}', 'edit')->name('user.edit');
+    //     Route::get('/user/{id}', 'show')->name('user.show');
+    //     Route::post('/user/{id}', 'update')->name('user.update');
+    //     Route::get('/user/delete/{id}', 'destroy')->name('user.delete');
+    // });
 
+    // CATEGORIES
     Route::resource('categories', DashboardCategoryController::class);
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | COMMENTS
-    |--------------------------------------------------------------------------
-    | Views:
-    | dashboard/comments/*
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/comments', [DashboardCommentController::class, 'index'])->name('comments.index');
+    
+    // COMMENTS
+    // Route::get('/comments', [DashboardCommentController::class, 'index'])->name('comments.index');
 });
 
-/* Logout */
-Route::post('/logout',
-[LoginController::class, 'logout'])
-->middleware('auth')
-->name('logout');

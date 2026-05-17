@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Tag;
 use App\Models\Post;
 use App\Models\User;
 use App\Services\UnsplashService;
@@ -32,7 +33,8 @@ class AppServiceProvider extends ServiceProvider
                     ->take(3)
                     ->get(),
 
-                'users' => User::take(3)->get()
+                'users' => User::take(3)->get(),
+                'tags' => Tag::take(6)->orderBy('id', 'desc')->get()
             ]);
         });
     }

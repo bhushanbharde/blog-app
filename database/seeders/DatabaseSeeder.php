@@ -24,23 +24,29 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
+
+    
     public function run(): void
     {        
         // $this->call([
-        //     UserSeeder::class,
-        //     PostSeeder::class,
-        //     CategorySeeder::class,
-        //     TagSeeder::class,
-        //     LikeSeeder::class,
-        //     CommentSeeder::class,
-        // ]);
+            //     UserSeeder::class,
+            //     PostSeeder::class,
+            //     CategorySeeder::class,
+            //     TagSeeder::class,
+            //     LikeSeeder::class,
+            //     CommentSeeder::class,
+            // ]);
+            
+        $myTags = ['Technology', 'Lifestyle', 'Health', 'Finance', 'Education', 'Machine Learning
+', 'PHP', 'Tutorial', 'Backend', 'Programming', 'Artificial Intelligence', 'Productivity', 'Software Development', 'Business', 'Software Engineering', 'Data Science', 'Marketing', 'Gaming', 'Blockchain', 'Economics', 'Travel', 'Philosophy'];
 
         $users = User::factory(200)->create();
         $categories = Category::factory(5)->create();
-        $tags = Tag::factory(20)->create();
+        // $tags = Tag::factory(20)->create();
         
         $posts = Post::factory(100)
             ->recycle($users)
+            ->hasTags($myTags)
             ->create();
 
         $comments = Comment::factory(400)

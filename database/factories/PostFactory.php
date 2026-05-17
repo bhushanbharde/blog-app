@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Tag;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -19,7 +20,7 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->sentence();
+        $title = fake()->realText($this->faker->numberBetween(30, 100));
 
         $urls = [
             'https://miro.medium.com/v2/resize:fit:4800/format:webp/0*Pr54mj2p6BsDDb5e',
@@ -47,7 +48,7 @@ class PostFactory extends Factory
 
         return [
             'user_id' => User::factory(),
-            'title' => fake()->realText($this->faker->numberBetween(30, 100)),
+            'title' => $title,
             'slug' => Str::slug($title),
             'content' => function () {
                 return '<h2 class="text-xl font-semibold my-2">' . $this->faker->realText(70) . '</h2>' .
@@ -64,5 +65,30 @@ class PostFactory extends Factory
             'status' => fake()->randomElement(['draft', 'published']),
             'published_at' => now()
         ];
+
+    }
+    
+    /**
+     * Attach specific tags without duplicating them in the database.
+     */
+    public function hasTags(array $tagNames): static
+    {
+        return $this->afterCreating(function (Post $post) use ($tagNames) {
+            // 1. Pick a random number of tags to assign (e.g., between 1 and 3 tags per post)
+            $randomCount = rand(1, min(3, count($tagNames)));
+            
+            // 2. Get random keys from your tag names array
+            $randomKeys = (array) array_rand($tagNames, $randomCount);
+            
+            foreach ($randomKeys as $key) {
+                $name = $tagNames[$key];
+                
+                // 3. Ensure tag exists uniquely in tags table
+                $tag = Tag::firstOrCreate(['name' => $name, 'shortname' => Str::slug($name)]);
+                
+                // 4. Attach to the current post pivot table
+                $post->tags()->syncWithoutDetaching([$tag->id]);
+            }
+        });
     }
 }

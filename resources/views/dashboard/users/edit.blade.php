@@ -11,8 +11,9 @@ Update user role/profile. --}}
         </h1>
     
         <div>
-            <form action="{{ route('user.update', $user->id) }}" method="POST" class="text-sm">
+            <form action="{{ route('dash.users.update', $user->id) }}" method="POST" class="text-sm">
                 @csrf
+                @method('PUT')
                 <div class="mt-8">
                     <label>User Name</label>
                     <x-forms.input type="text" value="{{ $user->name }}" name="name" placeholder="Enter Name" />
