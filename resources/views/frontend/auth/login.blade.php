@@ -1,17 +1,17 @@
 @extends('layouts.guest')
 
 @section('content')
+    <form method="POST">
 
-<form method="POST">
+        @csrf
 
-    @csrf
+        <input type="email" name="email">
 
-    <input type="email" name="email">
+        <input type="password" name="password">
 
-    <input type="password" name="password">
+        <div class="mt-8">
+            <x-forms.button name="Login" type="info" />
+        </div>
 
-    <button>Login</button>
-
-</form>
-
+    </form>
 @endsection

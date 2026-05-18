@@ -37,5 +37,11 @@ class AppServiceProvider extends ServiceProvider
                 'tags' => Tag::take(6)->orderBy('id', 'desc')->get()
             ]);
         });
+
+        view()->composer('components.navbar', function ($view) {
+            $view->with([
+                'user' => User::where('id', 12)->get(),
+            ]);
+        });
     }
 }

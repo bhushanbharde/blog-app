@@ -22,14 +22,13 @@ Used In:
                 {{ Str::words(strip_tags(preg_replace('/<h2[^>]*>.*?<\/h2>/is', '', $post->content))) }}
             </p>
         </div>
-
-        {{-- <img class="w-3/12 rounded-lg" src="{{ $post->cover_image }}" alt=""> --}}
+        
         <img class="w-3/12 rounded-lg object-cover" src="{{ $post->cover_image }}" alt="">
     </a>
 
-    <div class="flex text-gray-400 text-sm gap-6">
+    <div class="flex text-gray-400 text-sm gap-6 mt-4">
         <div>
-            <a href=""><i class="fa-solid fa-hands-clapping mr-1"></i>{{ $post->likes->count() }}</a>
+            <a href=""><i class="fa-regular fa-heart mr-1"></i>{{ $post->likes->count() }}</a>
         </div>
         <div>
             <a href=""><i class="fa-regular fa-comment mr-1"></i>{{ $post->comments->count() }}</a>

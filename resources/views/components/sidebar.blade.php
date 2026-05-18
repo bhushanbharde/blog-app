@@ -1,7 +1,7 @@
 @php
     // dd($posts);
 @endphp
-<div class="pl-10 pt-12 border-l border-l-gray-700 w-3/12">
+<div class="pl-10 border-l border-l-gray-700 w-3/12">
     <h2 class="mb-4">Staff Picks</h2>
     <div>
         @foreach ($posts as $key => $post)
@@ -43,8 +43,8 @@
                     </div>
                 </a>
 
-                <a href="{{ route('dash.users.show', $user->id) }}"
-                    class="text-sm px-4 py-2 border border-gray-700 rounded-lg hover:bg-gray-800">Follow</a>
+                <a href="{{ route('dash.users.show', $user->id) }}" class="">
+                <x-forms.button name="Follow" type="outline" /></a>
             </div>
         @endforeach
     </div>

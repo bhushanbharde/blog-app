@@ -2,11 +2,11 @@
 
 @section('content')
 
-<div class="flex justify w-full">
+<div class="flex w-full pb-20">
 
     @include('components.sidemenu')
 
-    <div class="w-10/12 py-28 px-12 ml-[20%]">
+    <div class="w-10/12 px-10 ml-[20%]">
         @yield('dashboard-content')
     </div>
 

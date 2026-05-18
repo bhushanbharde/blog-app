@@ -65,9 +65,14 @@ class PostController extends Controller
         ->where('id', $id)
         ->firstOrFail();
 
+        $userPosts = $post->user
+        ->posts()
+        ->latest()
+        ->get();
+
         // dd($post->comments);
                     
-        return view('frontend.posts.show', ['post' => $post]);
+        return view('frontend.posts.show', ['post' => $post, 'userPosts' => $userPosts]);
     }
 
     /**

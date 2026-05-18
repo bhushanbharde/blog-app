@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
@@ -37,16 +38,15 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        // $post = Post::with([
-        //     'comments.user',
-        //     'tags',
-        //     'user'
-        // ])
-        // ->withCount('likes')
-        // ->where('id', $id)
-        // ->firstOrFail();
+        $user = User::with([
+            'posts.comments.user',
+            'posts.likes'
+        ])
+        ->where('id', $id)->get();
+
+        // dd($user);
                     
-        return view('frontend.profile.show');
+        return view('frontend.profile.show', ['user' => $user[0]]);
     }
 
     /**

@@ -1,8 +1,8 @@
-<aside class="w-[20%] px-4 rounded bg-gray-900 border-r border-r-gray-700 fixed h-screen pt-20">
+<aside class="w-[20%] px-4 rounded bg-gray-900 border-r border-r-gray-700 fixed h-screen ">
 
-    <div class="py-4">
+    <div class="">
         <ul>
-            <a href="#" class="hover:bg-gray-800 px-4 py-2 rounded-md my-1 inline-block w-full">
+            <a href="{{ route('dash.index') }}" class="hover:bg-gray-800 px-4 py-2 rounded-md my-1 inline-block w-full">
                 <i class="fa-regular fa-house text-xl mr-2"></i>
                 Home
             </a>

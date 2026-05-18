@@ -1,7 +1,7 @@
 <div class="flex justify-between items-center bg-[#101828] px-6 py-2 border-b
 border-b-gray-700 fixed z-10 w-full">
     <div class="flex items-center">
-        <div class="px-3 font-bold text-3xl"><a href="/">BLOG</a></div>
+        <div class="px-3 font-bold text-3xl text-blue-500"><a href="/">Blogg</a></div>
         <div class="px-3 py-2"><input class="px-4 py-2.5 bg-[#1c2433] border border-gray-700 w-100 text-sm rounded-sm focus:outline-none" type="search" name="" id="" placeholder="Search Blog"></div>
         <div class="px-3 text-sm">
             <ul class="flex items-center justify-between mx-4 font-semibold">
@@ -15,7 +15,7 @@ border-b-gray-700 fixed z-10 w-full">
 
     <div class="flex items-center">
         <div class="px-3">
-            <a href="{{ route('profile.show', 'bhush1462') }}">
+            <a href="{{ route('profile.show', 12) }}">
                 <img class="w-8 border rounded-3xl" src="https://lh5.googleusercontent.com/-8NqnTnwVqr4/AAAAAAAAAAI/AAAAAAAAAic/lEhfY7K7mVs/c/photo.jpg" alt="user logo">
             </a>
         </div>

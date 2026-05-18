@@ -46,7 +46,9 @@ Update user role/profile. --}}
                     <p class="mt-2 text-red-400">{{ $message }}</p>
                 @enderror
 
-                <button class="px-4 py-2 bg-blue-600 rounded-sm mt-8 w-full hover:cursor-pointer">Save</button>
+                <div class="mt-8">
+                    <x-forms.button name="Save" type="primary" />
+                </div>
             </form>
         </div>
     </div>

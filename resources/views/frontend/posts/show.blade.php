@@ -5,22 +5,23 @@
 @extends('layouts.frontend')
 
 @section('frontend-content')
-    <div class="pt-20 px-28">
+    <div class="px-44">
         <div class="">
-            @if (session('status'))
-                <p class="px-4 py-3 rounded-lg bg-green-700 my-6">{{ session('status') }}</p>
-            @endif
-
+            <x-alert for="status" />
+            
             <div class="flex justify-between items-start">
                 <h1 class="text-4xl font-bold">{{ $post->title }}</h1>
-                <a href="{{ route('posts.edit', $post->id) }}"
-                    class="ml-10 whitespace-nowrap text-sm px-4 py-2 bg-indigo-600 rounded-lg">Edit Post</a>
+                <a href="{{ route('posts.edit', $post->id) }}" class="ml-10">
+                    <x-forms.button name="Edit" type="info" icon="pen" icontype="solid" />
+                </a>
             </div>
 
             <div class="flex items-center gap-4 text-sm my-8">
                 <img class="rounded-full w-8 " src="{{ $post->user->avatar }}" alt="">
                 <span>{{ $post->user->name }}</span>
-                <a href="" class="px-4 py-2 border border-gray-700 rounded-xl hover:bg-gray-700">Follow</a>
+                <a href="" class="mx-2">
+                    <x-forms.button name="Follow" type="outline" />
+                </a>
                 <span>{{ max(1, ceil(str_word_count(strip_tags($post->content)) / 200)) }} min read</span>
                 <i class="fa-solid fa-circle text-[3px]"></i>
                 <span>{{ \Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span>
@@ -31,7 +32,7 @@
                 <div class="flex text-gray-400 text-sm gap-6">
                     <div>
                         <a href="" class="flex items-center gap-1"><i
-                                class="text-xl fa-solid fa-hands-clapping"></i>{{ $post->like }}</a>
+                                class="text-xl fa-regular fa-heart"></i>{{ $post->likes->count() }}</a>
                     </div>
                     <div>
                         <a href="#comment_block" class="flex items-center gap-1"><i
@@ -79,7 +80,7 @@
             <div class="flex text-gray-400 text-sm gap-6">
                 <div>
                     <a href="" class="flex items-center gap-1"><i
-                            class="fa-solid fa-hands-clapping"></i>{{ $post->like }}</a>
+                            class="fa-regular fa-heart"></i>{{ $post->likes->count() }}</a>
                 </div>
                 <div>
                     <a href="" class="flex items-center gap-1"><i
@@ -105,19 +106,32 @@
         <hr class="text-gray-700" />
 
         {{-- comments --}}
-        <div class="mt-10 border-b border-b-gray-700 pb-10">
-            <div class="flex items-center gap-3 mb-2">
-                <img src="https://mockmind-api.uifaces.co/content/human/111.jpg" class="w-10 rounded-full" alt="">
-                <div class="">
-                    <p class="text-sm">Jon Doe</p>
+        <div class="mx-44">
+            <h1 class="text-2xl my-10">Responses ({{ $post->comments->count() }})</h1>
+            <div class="mt-10 border-b border-b-gray-700 pb-10 ">
+                <div class="flex items-center gap-3 mb-2">
+                    <img src="https://mockmind-api.uifaces.co/content/human/111.jpg" class="w-10 rounded-full" alt="">
+                    <div class="">
+                        <p class="text-sm">Jon Doe</p>
+                    </div>
                 </div>
+                <x-forms.input class="" placeholder="What are your thoughts?" />
             </div>
-            <x-forms.input class="" placeholder="What are your thoughts?" />
+            <div class="" id="comment_block">
+                @foreach ($post->comments as $comment)
+                    @include('components.comment')
+                @endforeach
+            </div>
         </div>
-        <div class="" id="comment_block">
-            @foreach ($post->comments as $comment)
-                @include('components.comment')
-            @endforeach
+
+        <div class="bg-gray-800 mt-10 px-20 py-10">
+            <h1 class="text-xl mb-8 font-semibold">More by {{ $post->user->name }}</h1>
+
+            <div class="grid grid-cols-2 gap-10">
+                @foreach ($userPosts as $post)
+                    @include('components.post-card-sm')
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection

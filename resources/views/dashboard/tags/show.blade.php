@@ -5,14 +5,14 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="px-44 pt-28">
+    <div class="px-44">
         <div class="flex items-center whitespace-nowrap gap-3 overflow-x-scroll text-sm">
             @foreach ($tags as $tag1)
                 <a href="{{ route('tags.show', $tag1->id) }}" class="inline-block px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition duration-300">{{ $tag1->name }}
                 </a>
             @endforeach
         </div>
-        <div class="pt-10 text-center">
+        <div class="mt-10 text-center">
             <h1 class="text-4xl font-bold">
                 {{ $tag->name }}
             </h1>
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="pt-10">
+        <div class="mt-10">
             @foreach ($posts as $post)
                 @include('components.post-card')
             @endforeach

@@ -15,12 +15,14 @@ Actions
         <h1 class="text-4xl font-bold ">
             Manage Users
         </h1>
-        <a href="{{ route('dash.users.create') }}" class="px-4 py-2 bg-indigo-600 rounded-sm">New User</a>
+        <a href="{{ route('dash.users.create') }}" class="">
+            <x-forms.button name="New User" type="info" />
+        </a>
     </div>
 
-    @if (session('status'))
-    <p class="px-4 py-4 my-6 bg-green-600 rounded-lg border border-green-900">{{ session('status') }}</p>
-    @endif
+    <div>
+        <x-alert for="status" />
+    </div>
 
     <table class="border-collapse border border-gray-600 w-full">
         <thead>
@@ -41,9 +43,19 @@ Actions
                     </td>
                     <td class="border border-gray-600 px-3 py-2">{{ $user->name }}</td>
                     <td class="border border-gray-600 px-3 py-2">{{ $user->email }}</td>
-                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('dash.users.show', $user->id) }} class="px-4 py-2 rounded-sm bg-blue-600">View</a></td>
-                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('dash.users.edit', $user->id) }} class="px-4 py-2 rounded-sm bg-gray-600">Edit</a></td>
-                    <td class="border border-gray-600 px-3 py-2"><a href={{ route('dash.users.destroy', $user->id) }} class="px-4 py-2 rounded-sm bg-red-700">Delete</a></td>
+                    <td class="border border-gray-600 px-3 py-2">
+                        <a href={{ route('dash.users.show', $user->id) }} class="">
+                            <x-forms.button name="View" type="primary" /></a>
+                    </td>
+                    <td class="border border-gray-600 px-3 py-2">
+                        <a href={{ route('dash.users.edit', $user->id) }} class="">
+                            <x-forms.button name="Edit" type="secondary" icon="pen" icontype="solid" /></a>
+                    </td>
+                    <td class="border border-gray-600 px-3 py-2">
+                        <a href={{ route('dash.users.destroy', $user->id) }} class="">
+                            <x-forms.button name="Delete" type="danger" icon="trash-can" icontype="solid" />
+                        </a>
+                    </td>
                 </tr>
             @endforeach
 

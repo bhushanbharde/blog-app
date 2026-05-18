@@ -2,7 +2,7 @@
 
 @section('frontend-content')
     <div class="flex justify-between items-center">
-        <h1 class="text-4xl font-semibold pt-16">Create New Post</h1>
+        <h1 class="text-4xl font-semibold">Create New Post</h1>
     </div>
 
     <div class="mt-10">
@@ -33,7 +33,9 @@
                 <p class="mt-2 text-red-400">{{ $message }}</p>
             @enderror
 
-            <button class="px-4 py-2 bg-blue-600 rounded-sm mt-8 w-full hover:cursor-pointer">Create</button>
+            <div class="mt-8">
+                <x-forms.button name="Create" type="primary" />
+            </div>
         </form>
 
     </div>

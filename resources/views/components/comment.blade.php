@@ -17,7 +17,7 @@
     <div class="flex items-center gap-10 mt-4 text-gray-400">
         <div>
             <a href="" class="flex items-center gap-1">
-                <i class="fa-solid fa-hands-clapping"></i>12</a>
+                <i class="fa-regular fa-heart"></i>12</a>
         </div>
         <div>
             <a href="" class="flex items-center gap-1">

@@ -42,7 +42,7 @@ Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('cat
 Route::resource('tags', TagController::class)->only(['show']);
 
 /* Public Profile */
-Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 
 /* Edit Profile */
 // Route::middleware('auth')->group(function () {

@@ -13,7 +13,10 @@
             @error('tag_name')
                 <p class="mt-2 text-red-600">{{ $message }}</p>
             @enderror
-            <button class="px-4 py-2 bg-indigo-600 rounded-lg mt-4 hover:cursor-pointer" type="submit">Create</button>
+
+            <div class="mt-8">
+                <x-forms.button name="Create" type="primary" /></a>
+            </div>
         </form>
     </div>
 @endsection

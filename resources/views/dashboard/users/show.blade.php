@@ -5,7 +5,14 @@
         <h1 class="text-xl font-semibold ">
             Users Info
         </h1>
-        <a href="{{ route('dash.users.index') }}" class="px-4 py-2 bg-indigo-600 rounded-sm">Back</a>
+        <div class="flex">
+            <a href="{{ route('dash.users.index') }}" class="mr-2">
+                <x-forms.button name="Back" type="outline"/>
+            </a>
+            <a href="{{ route('profile.show', $user->id) }}" class="">
+                <x-forms.button name="Profile" type="info"/>
+            </a>
+        </div>
     </div>
 
     <hr class="text-gray-700" />
