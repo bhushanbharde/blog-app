@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\dashboard;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -12,7 +12,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.index');
     }
 
     /**

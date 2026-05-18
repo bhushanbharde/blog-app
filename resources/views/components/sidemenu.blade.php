@@ -2,15 +2,15 @@
 
     <div class="py-4">
         <ul>
+            <a href="#" class="hover:bg-gray-800 px-4 py-2 rounded-md my-1 inline-block w-full">
+                <i class="fa-regular fa-house text-xl mr-2"></i>
+                Home
+            </a>
             <a href="{{ route('dash.users.index') }}" class="hover:bg-gray-800 px-4 py-2 rounded-md my-1 inline-block w-full">
                 <i class="fa-regular fa-user text-xl mr-2"></i>
                 Users
             </a>
-            <a href="#" class="hover:bg-gray-800 px-4 py-2 rounded-md my-1 inline-block w-full">
-                <i class="fa-regular fa-house text-xl mr-2"></i>
-                Profile
-            </a>
-            <a href="{{ route('tags.index') }}" class="hover:bg-gray-800 px-4 py-2 rounded-md my-1 inline-block w-full">
+            <a href="{{ route('dash.tags.index') }}" class="hover:bg-gray-800 px-4 py-2 rounded-md my-1 inline-block w-full">
                 <i class="fa-solid fa-tag text-xl mr-2"></i>
                 Tags
             </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Models\Tag;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +14,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('dashboard.tags.index');
+        $tags = Tag::orderBy('id', 'desc')->get();
+        return view('dashboard.tags.index', compact('tags'));
     }
 
     /**
@@ -21,7 +23,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.tags.create');
     }
 
     /**
@@ -29,7 +31,18 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tag_name' => ['required', 'min:2']
+        ]);
+
+        $res = Tag::create([
+            'name' => $request->tag_name,
+            'shortname' => Str::slug($request->tag_name),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        return redirect()->route('dash.tags.index')->with('status', 'Tag created successfully!');;
     }
 
     /**
@@ -45,8 +58,6 @@ class TagController extends Controller
             'tag',
             'posts'
         ));
-
-        // return view('dashboard.tags.show', ['tag' => $tag->id]);
     }
 
     /**
@@ -54,7 +65,8 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        $tag = Tag::find($tag->id);
+        return view('dashboard.tags.edit', compact('tag'));
     }
 
     /**
@@ -62,7 +74,17 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $request->validate([
+            'tag_name' => ['required', 'min:2']
+        ]);
+
+        $tag->update([
+            'name' => $request->tag_name,
+            'shortname' => Str::slug($request->tag_name),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('dash.tags.index')->with('status', 'Tag updated successfully!');
     }
 
     /**
@@ -70,6 +92,8 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        // dd($tag);
+        Tag::where('id', $tag->id)->delete();
+        return redirect()->route('dash.tags.index')->with('status', 'Tag deleted successfully!');
     }
 }

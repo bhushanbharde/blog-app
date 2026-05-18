@@ -58,7 +58,8 @@ class PostController extends Controller
         $post = Post::with([
             'comments.user',
             'tags',
-            'user'
+            'user',
+            'likes'
         ])
         ->withCount('likes')
         ->where('id', $id)

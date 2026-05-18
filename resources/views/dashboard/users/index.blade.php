@@ -13,7 +13,7 @@ Actions
 @section('dashboard-content')
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-4xl font-bold ">
-            Users List
+            Manage Users
         </h1>
         <a href="{{ route('dash.users.create') }}" class="px-4 py-2 bg-indigo-600 rounded-sm">New User</a>
     </div>

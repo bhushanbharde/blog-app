@@ -15,7 +15,7 @@ use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\PostController as DashboardPostController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
-// use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
+use App\Http\Controllers\Dashboard\TagController as DashboardTagController;
 
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 
 // TAGS ROUTES
-Route::resource('tags', TagController::class);
+Route::resource('tags', TagController::class)->only(['show']);
 
 /* Public Profile */
 Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');
@@ -71,6 +71,8 @@ Route::middleware('guest')->group(function () {
 Route::prefix('dashboard')
     ->name('dash.')
     ->group(function () {
+    
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     // Trash Posts
     Route::get('/posts-trash', [DashboardPostController::class, 'trash'])->name('posts.trash');
@@ -89,7 +91,10 @@ Route::prefix('dashboard')
     // });
 
     // CATEGORIES
-    Route::resource('categories', DashboardCategoryController::class);
+    // Route::resource('categories', DashboardCategoryController::class);
+
+    // TAGS
+    Route::resource('tags' , DashboardTagController::class)->except(['show']);
     
     // COMMENTS
     // Route::get('/comments', [DashboardCommentController::class, 'index'])->name('comments.index');

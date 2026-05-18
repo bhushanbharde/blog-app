@@ -10,7 +10,7 @@ Used In:
 <div class="py-8 rounded-md shadow border-b border-b-gray-700">
     <div class="flex items-center text-sm my-3">
         <img class="rounded-full w-8 mr-2 " src="{{ $post->user->avatar }}" alt="">
-        <a href="">{{ $post->user->name }}</a>
+        <a href="{{ route('dash.users.show', $post->user->id) }}">{{ $post->user->name }}</a>
         <i class="fa-solid fa-circle text-[4px] mx-2 text-gray-400"></i>
         <span class="text-gray-400">{{ \Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span>
     </div>
@@ -29,13 +29,13 @@ Used In:
 
     <div class="flex text-gray-400 text-sm gap-6">
         <div>
-            <a href=""><i class="fa-solid fa-hands-clapping"></i> 23</a>
+            <a href=""><i class="fa-solid fa-hands-clapping mr-1"></i>{{ $post->likes->count() }}</a>
         </div>
         <div>
-            <a href=""><i class="fa-regular fa-comment"></i> 34</a>
+            <a href=""><i class="fa-regular fa-comment mr-1"></i>{{ $post->comments->count() }}</a>
         </div>
         <div>
-            <a href=""><i class="fa-solid fa-retweet"></i> 12</a>
+            <a href=""><i class="fa-solid fa-retweet mr-1"></i> 12</a>
         </div>
     </div>
 </div>
