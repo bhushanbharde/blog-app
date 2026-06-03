@@ -14,7 +14,7 @@ use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\PostController as DashboardPostController;
-use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
+// use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
 use App\Http\Controllers\Dashboard\TagController as DashboardTagController;
 
 // Home Page

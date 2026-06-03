@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class User extends Model
+class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory;
+    use HasFactory, HasApiTokens;
+
+    protected $fillable = ['name', 'email', 'password'];
 
     public function posts()
     {
