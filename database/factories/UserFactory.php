@@ -24,7 +24,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $randomFaceId = $this->faker->numberBetween(50, 222);
+        $randomFaceId = rand(50, 222);
 
         return [
             'name' => fake()->name(),
