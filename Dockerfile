@@ -49,8 +49,4 @@ RUN chmod -R 777 storage bootstrap/cache \
 EXPOSE 8000
 
 # Start Laravel
-RUN php artisan config:cache
-RUN php artisan route:cache
-RUN php artisan view:cache
-
 CMD php -S 0.0.0.0:${PORT:-8000} -t public
