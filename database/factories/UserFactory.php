@@ -27,13 +27,13 @@ class UserFactory extends Factory
         $randomFaceId = rand(50, 222);
 
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
-            'bio' => fake()->realText($maxNbChars = 200, $indexSize = 2),
+            'bio' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
             'avatar' => "https://mockmind-api.uifaces.co/content/human/{$randomFaceId}.jpg",
-            'role' => fake()->randomElement([1,2,3]),
-            'about' => fake()->randomElement(['Product Manager', 'Professor', 'Product design', 'Entrepreneur', 'Health scientist', 'Tech Writer', 'AI Engineer', 'Data Analyst', 'Best selling author']),
+            'role' => $this->faker->randomElement([1,2,3]),
+            'about' => $this->faker->randomElement(['Product Manager', 'Professor', 'Product design', 'Entrepreneur', 'Health scientist', 'Tech Writer', 'AI Engineer', 'Data Analyst', 'Best selling author']),
             'remember_token' => Str::random(20),
         ];
     }

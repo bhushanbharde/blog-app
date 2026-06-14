@@ -18,8 +18,8 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->randomElement(['Tech', 'Lifestyle', 'Health', 'Finance', 'Education']),
-            'slug' => fake()->slug(1)
+            'name' => $this->faker->randomElement(['Tech', 'Lifestyle', 'Health', 'Finance', 'Education']),
+            'slug' => $this->faker->slug(1)
         ];
     }
 }

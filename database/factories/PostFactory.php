@@ -20,7 +20,7 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->realText($this->faker->numberBetween(30, 100));
+        $title = $this->faker->realText($this->faker->numberBetween(30, 100));
 
         $urls = [
             'https://miro.medium.com/v2/resize:fit:4800/format:webp/0*Pr54mj2p6BsDDb5e',
@@ -61,8 +61,8 @@ class PostFactory extends Factory
                     '<br>'.
                     '<p class="text-gray-400">' .$this->faker->realText(200) . '</p>';
             },
-            'cover_image' => fake()->randomElement($urls),
-            'status' => fake()->randomElement(['draft', 'published']),
+            'cover_image' => $this->faker->randomElement($urls),
+            'status' => $this->faker->randomElement(['draft', 'published']),
             'published_at' => now()
         ];
 
