@@ -57,4 +57,4 @@ Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware('auth:sanctum')->post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'show']);
+//Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'show']);
