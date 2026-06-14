@@ -2,9 +2,9 @@
 
 // use Illuminate\Http\Request;
 use App\Http\Controllers\auth\LoginController;
-use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\Frontend\PostController;
-use App\Http\Controllers\Frontend\TagController;
+use App\Http\Controllers\dashboard\UserController;
+use App\Http\Controllers\frontend\PostController;
+use App\Http\Controllers\frontend\TagController;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;

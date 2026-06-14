@@ -4,18 +4,18 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Frontend\TagController;
+use App\Http\Controllers\frontend\TagController;
 
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\PostController;
+use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\PostController;
 
-use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\Frontend\ProfileController;
-use App\Http\Controllers\Frontend\CategoryController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\PostController as DashboardPostController;
-// use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
-use App\Http\Controllers\Dashboard\TagController as DashboardTagController;
+use App\Http\Controllers\dashboard\UserController;
+use App\Http\Controllers\frontend\ProfileController;
+use App\Http\Controllers\frontend\CategoryController;
+use App\Http\Controllers\dashboard\DashboardController;
+use App\Http\Controllers\dashboard\PostController as DashboardPostController;
+// use App\Http\Controllers\dashboard\CategoryController as DashboardCategoryController;
+use App\Http\Controllers\dashboard\TagController as DashboardTagController;
 
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home');
