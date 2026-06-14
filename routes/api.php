@@ -10,7 +10,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('posts', PostController::class);
+Route::resource('posts', PostController::class)->names('api.posts');
 
 // Staff Picks
 Route::get('/staffpicks', function () {
@@ -50,7 +50,7 @@ Route::middleware('')->group(function () {
 });
 
 // TAG ROUTES
-Route::resource('tags', TagController::class);
+Route::resource('tags', TagController::class)->names('api.tags');
 
 Route::post('register', [LoginController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
