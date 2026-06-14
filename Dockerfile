@@ -1,6 +1,6 @@
 FROM php:8.4-cli
 
-# Install system dependencies
+# Install system dependencies + Node.js
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libcurl4-openssl-dev \
     libssl-dev \
+    nodejs \
+    npm \
     && docker-php-ext-install \
     pdo_mysql \
     mbstring \
@@ -35,10 +37,15 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-interaction
 
-# Set permissions
-RUN chmod -R 777 storage bootstrap/cache
+# Install Node dependencies and build assets
+RUN npm install && npm run build
 
-# Expose port
+RUN chmod -R 777 storage bootstrap/cache \
+    && mkdir -p storage/logs \
+    && mkdir -p storage/framework/sessions \
+    && mkdir -p storage/framework/views \
+    && mkdir -p storage/framework/cache
+
 EXPOSE 8000
 
 # Start Laravel
