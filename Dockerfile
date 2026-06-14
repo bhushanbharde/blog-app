@@ -1,6 +1,6 @@
 FROM php:8.4-cli
 
-# Install system dependencies (added libcurl4-openssl-dev)
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -y \
     zip \
     bcmath \
     gd \
-    tokenizer \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
