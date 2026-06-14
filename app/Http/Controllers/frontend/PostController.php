@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Ramsey\Uuid\Type\Integer;
 use App\Http\Requests\PostRequest;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class PostController extends Controller
@@ -18,7 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user')->paginate(5);
+        $posts = Post::with(['user'])
+        ->withCount(['likes', 'comments'])
+        ->latest()->take(20)->get();
+
+        return response()->json(['message' => 'Welcome to the Blog API', 'posts' => $posts]);
         return view('frontend.posts.index', ['posts' => $posts]);
     }
 
@@ -38,7 +39,7 @@ class PostController extends Controller
         $post = new Post;
         $post->title = $request->title;
         $post->cover_image = $request->cover_image;
-        $post->content = $request->content;
+        $post->content = $request->input('content');
         $post->user_id = User::inRandomOrder()->first()?->id ?? User::factory();
         $post->slug = Str::slug($request->title);
         $post->status = 'draft';
@@ -70,7 +71,7 @@ class PostController extends Controller
         ->latest()
         ->get();
 
-        // dd($post->comments);
+        return response()->json(['post' => $post, 'userPosts' => $userPosts]);
                     
         return view('frontend.posts.show', ['post' => $post, 'userPosts' => $userPosts]);
     }
@@ -94,7 +95,7 @@ class PostController extends Controller
         // dd($post);
         $post->title = $request->title;
         $post->cover_image = $request->cover_image;
-        $post->content = $request->content;
+        $post->content = $request->input('content');
         $post->updated_at = now();
         $post->save();
 

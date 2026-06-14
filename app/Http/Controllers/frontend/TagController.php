@@ -13,6 +13,8 @@ class TagController extends Controller
      */
     public function index()
     {
+        $tags = Tag::get();
+        return response()->json(['tags' => $tags]);
         return view('dashboard.tags.index');
     }
 

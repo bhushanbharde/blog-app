@@ -3,9 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Tag;
-use App\Models\Post;
 use App\Models\User;
-use App\Services\UnsplashService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 

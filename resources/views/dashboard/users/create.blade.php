@@ -17,34 +17,34 @@ Create admin/author user --}}
                     <label>User Name</label>
                     <x-forms.input type="text" value="{{ old('name') }}" name="name" placeholder="Enter Name" />
                 </div>
-                @error('name')
+                {{-- @error('name')
                     <p class="mt-2 text-red-400">{{ $message }}</p>
-                @enderror
+                @enderror --}}
 
                 <div class="mt-8">
                     <label>Email Address</label>
                     <x-forms.input type="text" value="{{ old('email') }}" name="email" placeholder="Enter Email" />
                 </div>
-                @error('email')
+                {{-- @error('email')
                     <p class="mt-2 text-red-400">{{ $message }}</p>
-                @enderror
+                @enderror --}}
 
                 <div class="mt-8">
                     <label>Avatar</label>
                     <x-forms.input type="text" value="{{ old('avatar') }}" name="bio" placeholder="Enter Avatar" />
                 </div>
-                @error('bio')
+                {{-- @error('bio')
                     <p class="mt-2 text-red-400">{{ $message }}</p>
-                @enderror
+                @enderror --}}
 
                 <div class="mt-8">
                     <label>Bio</label>
                     <x-forms.textarea value="{{ old('bio') }}" name="avatar" rows="3"
                         placeholder="Enter about yourself" />
                 </div>
-                @error('avatar')
+                {{-- @error('avatar')
                     <p class="mt-2 text-red-400">{{ $message }}</p>
-                @enderror
+                @enderror --}}
 
                 <div class="mt-8">
                     <x-forms.button name="Create" type="primary" />
