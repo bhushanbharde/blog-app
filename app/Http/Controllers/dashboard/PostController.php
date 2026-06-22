@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -10,9 +11,16 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // dd($request);
+        $perPage = $request->query('per_page', 20);
+
+        $posts = Post::with(['user'])
+            ->withCount(['likes', 'comments'])
+            ->latest()->paginate($perPage);
+
+        return response()->json(['posts' => $posts]);
     }
 
     /**

@@ -7,20 +7,21 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $perPage = $request->query('per_page', 10);
         $posts = Post::with(['user'])
         ->withCount(['likes', 'comments'])
-        ->latest()->take(20)->get();
+        ->latest()->paginate($perPage);
 
         return response()->json(['message' => 'Welcome to the Blog API', 'posts' => $posts]);
-        return view('frontend.posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -48,6 +49,10 @@ class PostController extends Controller
         $post->updated_at = now();        
         
         $post->save();
+        return response()->json([
+            'status' => true,
+            'message' => 'Post created successfully!'
+        ]);
         return redirect()->route('posts.index')->with('status', 'Post created successfully!');;
     }
 
@@ -99,6 +104,7 @@ class PostController extends Controller
         $post->updated_at = now();
         $post->save();
 
+        return response()->json(['status' => true, 'message' => 'Post updated successfully!']);
         return redirect()->route('posts.show', $id)->with('status', 'Post updated successfully!');;
     }
 

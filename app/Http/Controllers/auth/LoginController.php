@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
+    public function me(Request $request){
+        return response()->json([
+            'user' => $request->user()
+        ]);
+    }
     public function register(Request $request){
         $validateUser = Validator::make(
             $request->all(),
@@ -33,6 +38,7 @@ class LoginController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role_id' => isset($request->role) ?? 3,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -65,8 +71,9 @@ class LoginController extends Controller
             $authUser = Auth::user();
             return response()->json([
                 'status' => true,
+                'user' => $authUser,
                 'message' => 'User logged in successfully',
-                'token' => $authUser->createToken("API Token")->plainTextToken,
+                'token' => $authUser->createToken("angular-blog")->plainTextToken,
                 'token_type' => 'bearer'
             ], 200);
         }

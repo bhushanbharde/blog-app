@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('about')->nullable();
             $table->text('bio')->nullable();
             $table->string('avatar')->nullable();
-            $table->foreignId('role')->nullable();
+            $table->foreignId('role_id')->constrined()->onDelete('cascade');
             $table->rememberToken()->nullable();
             $table->timestamps();
         });
