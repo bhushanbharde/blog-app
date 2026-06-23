@@ -7,27 +7,31 @@ use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\dashboard\UserController;
 use App\Http\Controllers\frontend\PostController;
 use App\Http\Controllers\dashboard\PostController as AdminPostController;
+use App\Http\Controllers\dashboard\TagController as AdminTagController;
 use App\Http\Controllers\frontend\TagController;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-// POST ROUTES
-Route::resource('posts', PostController::class)->names('api.posts');
 
-//ADMIN POST ROUTES
+// ******************************** ADMIN ROUTES ********************************
+
 Route::middleware(['auth:sanctum','admin'])->group(function () {
     Route::resource('admin-posts', AdminPostController::class)->names('admin.posts');
 });
 
-// USER ROUTES
 Route::middleware('')->group(function () {
     Route::resource('users', UserController::class);
 });
 
-// TAG ROUTES
-Route::resource('tags', TagController::class)->names('api.tags');
+Route::resource('tags', AdminTagController::class)->names('admin.tags');
+
+
+// ******************************** WEB ROUTES ********************************
+Route::resource('posts', PostController::class)->names('api.posts');
+
+Route::get('tag/{slug}', [TagController::class, 'getTagBySlug']);
 
 // Staff Picks
 Route::get('/staffpicks', function () {
@@ -60,7 +64,7 @@ Route::get('/top-authors', function () {
     return response()->json(['status' => true, 'authors' => $topAuthors]);
 });
 
-//AUTH ROUTES
+// ******************************** AUTH ROUTES ********************************
 Route::middleware('auth:sanctum')
     ->group(function () {
         Route::get('/me', [LoginController::class, 'me']);
@@ -69,3 +73,12 @@ Route::middleware('auth:sanctum')
 
 Route::post('register', [LoginController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
+
+
+/*
+php artisan route:clear
+php artisan cache:clear
+php artisan optimize:clear
+
+php artisan serve
+*/
