@@ -6,6 +6,7 @@ use App\Models\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class TagController extends Controller
 {
@@ -14,7 +15,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
+        $tags = Tag::withCount('posts')->latest()->get();
         return $tags;
     }
 
@@ -31,18 +32,23 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        $message = 'Tag created successfully!';
         $request->validate([
             'tag_name' => ['required', 'min:2']
         ]);
 
-        $res = Tag::create([
-            'name' => $request->tag_name,
-            'shortname' => Str::slug($request->tag_name),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        try {
+            $res = Tag::create([
+                'name' => $request->tag_name,
+                'shortname' => Str::slug($request->tag_name),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        } catch (Exception $e) {
+            $message = $e;
+        }
 
-        return redirect()->route('dash.tags.index')->with('status', 'Tag created successfully!');;
+        return response()->json(['status' => true, 'message' => $message]);
     }
 
     /**
@@ -50,14 +56,11 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
+        return $tag;
         $posts = $tag->posts()
                  ->latest()
                  ->paginate(10);
 
-        return view('dashboard.tags.show', compact(
-            'tag',
-            'posts'
-        ));
     }
 
     /**
@@ -74,17 +77,22 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
+        $message = 'Tag updated successfully!';
         $request->validate([
             'tag_name' => ['required', 'min:2']
         ]);
 
-        $tag->update([
-            'name' => $request->tag_name,
-            'shortname' => Str::slug($request->tag_name),
-            'updated_at' => now(),
-        ]);
+        try {
+            $tag->update([
+                'name' => $request->tag_name,
+                'shortname' => Str::slug($request->tag_name),
+                'updated_at' => now(),
+            ]);
+        } catch (Exception $e) {
+            $message = $e;
+        }
 
-        return redirect()->route('dash.tags.index')->with('status', 'Tag updated successfully!');
+        return response()->json(['status' => true, 'message' => $message]);
     }
 
     /**

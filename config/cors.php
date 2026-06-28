@@ -8,7 +8,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:4200'],
+    'allowed_origins' => ['http://localhost:4200', 'https://angular-blog.pages.dev'],
 
     'allowed_headers' => ['*'],
 
