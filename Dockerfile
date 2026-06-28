@@ -49,4 +49,4 @@ RUN chmod -R 777 storage bootstrap/cache \
 EXPOSE 8000
 
 # Start Laravel
-CMD php artisan optimize:clear && php -S 0.0.0.0: {PORT:-8000} -t public
+CMD php artisan migrate:fresh --seed && php artisan optimize:clear && php -S 0.0.0.0: {PORT:-8000} -t public
